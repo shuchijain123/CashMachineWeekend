@@ -35,6 +35,12 @@ public class CashMachine {
                 update
         );
     }
+    public void menu(int id) {
+        tryCall(
+                () -> bank.getAccountByMenuId(id),
+                update
+        );
+    }
 
     public void deposit(int amount) {
         if (accountData != null) {

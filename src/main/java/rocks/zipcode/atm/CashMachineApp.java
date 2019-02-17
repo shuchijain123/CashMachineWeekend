@@ -17,6 +17,8 @@ import javafx.scene.text.Text;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
+import java.beans.EventHandler;
+
 
 /**
  * @author ZipCodeWilmington
@@ -29,6 +31,8 @@ public class CashMachineApp extends Application {
     private TextField Balance = new TextField();
     private TextField Amount = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+    Button btnDeposit = new Button("Deposit");
+    Button btnWithdraw = new Button("Withdraw");
 
    /* private Parent createContent() {
         VBox vbox = new VBox(10);
@@ -92,6 +96,7 @@ public class CashMachineApp extends Application {
         Button btnSubmit = new Button("Login with your Account ID");
         btnSubmit.setOnAction(e -> {
             try {
+                cashMachine.exit();
             System.out.println("accountid1"+AccountId.getText()+"suffix");
             if (AccountId.getText().equalsIgnoreCase("")){
 
@@ -109,7 +114,9 @@ public class CashMachineApp extends Application {
             }
 
                 int id = Integer.parseInt(AccountId.getText());
+
                 cashMachine.login(id);
+                areaInfo.setText(cashMachine.toString());
 
 
 
@@ -136,7 +143,7 @@ public class CashMachineApp extends Application {
             Balance.setText(String.valueOf(cashMachine.getAccountData().getBalance()));
             //cashMachine.exit();
             } catch (Exception e1) {
-                //e1.printStackTrace();
+                e1.printStackTrace();
             }
 
         });
@@ -213,9 +220,82 @@ public class CashMachineApp extends Application {
 
         Text Idtext = new Text();
         Idtext.setText("Enter your account Id : ");
-        vbox.getChildren().addAll(Idtext,AccountId, hbx1,hbx2,flowpane, areaInfo);
+
+        MenuBar menuBar = new MenuBar();
+        Menu menu = new Menu("Select your Account Id");
+        MenuItem menuItem1 = new MenuItem("1000");
+        MenuItem menuItem2 = new MenuItem("2000");
+        MenuItem menuItem3 = new MenuItem("4444");
+        MenuItem menuItem4 = new MenuItem("5555");
+        MenuItem menuItem5 = new MenuItem("1234");
+        MenuItem menuItem6 = new MenuItem("5000");
+
+
+
+        menu.getItems().add(menuItem1);
+        menu.getItems().add(menuItem2);
+        menu.getItems().add(menuItem3);
+        menu.getItems().add(menuItem4);
+        menu.getItems().add(menuItem5);
+        menu.getItems().add(menuItem6);
+        menuBar.getMenus().add(menu);
+
+        menuItem1.setOnAction(e -> {
+                    menuaction(menuItem1);
+            areaInfo.setText(cashMachine.toString());
+        });
+
+        menuItem2.setOnAction(e -> {
+            menuaction(menuItem2);
+            areaInfo.setText(cashMachine.toString());
+        });
+
+        menuItem3.setOnAction(e -> {
+            menuaction(menuItem3);
+            areaInfo.setText(cashMachine.toString());
+        });
+
+        menuItem4.setOnAction(e -> {
+            menuaction(menuItem4);
+            areaInfo.setText(cashMachine.toString());
+        });
+        menuItem5.setOnAction(e -> {
+            menuaction(menuItem5);
+            areaInfo.setText(cashMachine.toString());
+        });
+        menuItem6.setOnAction(e -> {
+            menuaction(menuItem6);
+            areaInfo.setText(cashMachine.toString());
+        });
+
+
+           /* btnDeposit.setDisable(true);
+        btnWithdraw.setDisable(true);
+        int id = Integer.parseInt(menuItem1.getText());
+
+        cashMachine.menu(id);
+
+        Name.setText(cashMachine.getAccountData().getName());
+        Email.setText(cashMachine.getAccountData().getEmail());
+        Balance.setText(String.valueOf(cashMachine.getAccountData().getBalance()));
+        btnDeposit.setDisable(false);
+        btnWithdraw.setDisable(false);
+        */
+
+
+
+
+
+
+
+
+
+        vbox.getChildren().addAll(Idtext,AccountId, hbx1,hbx2,flowpane, menuBar,areaInfo);
         return vbox;
     }
+
+
+
 
 
 
@@ -227,5 +307,26 @@ public class CashMachineApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+
+
+    public  void menuaction(MenuItem item){
+        btnDeposit.setDisable(true);
+        btnWithdraw.setDisable(true);
+        int id = Integer.parseInt(item.getText());
+
+        cashMachine.menu(id);
+
+        Name.setText(cashMachine.getAccountData().getName());
+        Email.setText(cashMachine.getAccountData().getEmail());
+        Balance.setText(String.valueOf(cashMachine.getAccountData().getBalance()));
+        btnDeposit.setDisable(false);
+        btnWithdraw.setDisable(false);
+
+
+
+
     }
 }

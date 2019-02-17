@@ -29,8 +29,8 @@ public class Bank {
         accounts.put(2000, new PremiumAccount(new AccountData(
                 2000, "Example 2", "example2@gmail.com", 200
         )));
-        accounts.put(1234, new PremiumAccount(new AccountData(
-                1234, "Milo", "milo2@gmail.com", 123
+        accounts.put(5555, new PremiumAccount(new AccountData(
+                5555, "Milo", "milo2@gmail.com", 123
         )));
         accounts.put(5000, new PremiumAccount(new AccountData(
                 5000, "Shuchi", "mylearn2@gmail.com", 300
@@ -50,6 +50,15 @@ public class Bank {
             return ActionResult.success(account.getAccountData());
         } else {
             return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
+        }
+    }
+    public ActionResult<AccountData> getAccountByMenuId(int id) {
+        Account account = accounts.get(id);
+
+        if (account != null) {
+            return ActionResult.success(account.getAccountData());
+        } else {
+            return ActionResult.fail("Select properly");
         }
     }
 
